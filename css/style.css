@@ -1,0 +1,215 @@
+/* Personal Dashboard styles */
+
+/* ── CSS Custom Properties (colour tokens) ── */
+:root {
+  /* Background colours */
+  --color-body-bg: #f0f2f5;
+  --color-widget-bg: #ffffff;
+
+  /* Foreground / text colours */
+  --color-body-text: #1a1a2e;
+  --color-widget-title: #555;
+  --color-muted: #666;
+  --color-muted-light: #aaa;
+
+  /* Border colours */
+  --color-input-border: #d1d5db;
+  --color-divider: #f0f0f0;
+
+  /* Button / accent colours */
+  --color-btn-bg: #4f46e5;
+  --color-btn-bg-hover: #4338ca;
+  --color-btn-text: #fff;
+
+  /* Focus / active accent */
+  --color-focus-border: #4f46e5;
+
+  /* Timer finished state */
+  --color-timer-finished: #e53e3e;
+
+  /* Shadow */
+  --shadow-widget: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Dark-mode overrides ── */
+[data-theme="dark"] {
+  --color-body-bg: #0f1117;
+  --color-widget-bg: #1e2130;
+  --color-body-text: #e8eaf0;
+  --color-widget-title: #a0a8c0;
+  --color-muted: #8892aa;
+  --color-muted-light: #5a6278;
+  --color-input-border: #3a4060;
+  --color-divider: #2a3050;
+  --color-btn-bg: #6366f1;
+  --color-btn-bg-hover: #4f46e5;
+  --color-btn-text: #fff;
+  --color-focus-border: #818cf8;
+  --color-timer-finished: #fc8181;
+  --shadow-widget: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px; /* ≥ 14px — satisfies Req 5.2 */
+  line-height: 1.5;
+  background: var(--color-body-bg);
+  color: var(--color-body-text);
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+/* ── Grid layout ── */
+/* Four widgets in a 2×2 grid; adapts to viewport — satisfies Req 5.1 */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Widget cards ── */
+.widget {
+  background: var(--color-widget-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.widget-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-widget-title);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Greeting widget ── */
+#greeting-time {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+#greeting-date {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+#greeting-msg {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* ── Focus Timer ── */
+#timer-display {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.timer-controls button,
+#todo-form button,
+#links-form button {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  transition: background 0.15s;
+}
+
+.timer-controls button:hover,
+#todo-form button:hover,
+#links-form button:hover {
+  background: var(--color-btn-bg-hover);
+}
+
+.timer-finished #timer-display {
+  color: var(--color-timer-finished);
+}
+
+/* ── To-Do List ── */
+#todo-form,
+#links-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#todo-form input,
+#links-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#todo-form input:focus,
+#links-form input:focus {
+  border-color: var(--color-focus-border);
+}
+
+#todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 0.95rem;
+}
+
+#todo-list li.completed span {
+  text-decoration: line-through;
+  color: var(--color-muted-light);
+}
+
+/* ── Quick Links ── */
+#links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Responsive: single-column below 768px — satisfies Req 5.5 ── */
+@media (max-width: 767px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body {
+    padding: 1rem;
+  }
+}

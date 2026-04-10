@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem('dashboard_theme');
+      document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+    })();
+  </script>
+</head>
+<body>
+  <header class="dashboard-header">
+    <button id="theme-toggle" type="button">Toggle Theme</button>
+  </header>
+  <main class="dashboard-grid">
+
+    <!-- Greeting Widget -->
+    <section id="greeting" class="widget">
+      <div id="greeting-time"></div>
+      <div id="greeting-date"></div>
+      <div id="greeting-msg"></div>
+      <form id="greeting-name-form">
+        <input id="greeting-name-input" type="text" placeholder="Enter your name…" autocomplete="off" />
+        <button type="submit">Save</button>
+      </form>
+    </section>
+
+    <!-- Focus Timer Widget -->
+    <section id="focus-timer" class="widget">
+      <h2 class="widget-title">Focus Timer</h2>
+      <div id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button id="timer-start" type="button">Start</button>
+        <button id="timer-stop" type="button">Stop</button>
+        <button id="timer-reset" type="button">Reset</button>
+      </div>
+      <form id="timer-duration-form">
+        <input id="timer-duration-input" type="number" min="1" max="180" placeholder="Minutes (1–180)" />
+        <button type="submit">Set</button>
+      </form>
+    </section>
+
+    <!-- To-Do List Widget -->
+    <section id="todo" class="widget">
+      <h2 class="widget-title">To-Do</h2>
+      <form id="todo-form">
+        <input id="todo-input" type="text" placeholder="Add a task…" autocomplete="off" />
+        <button type="submit">Add</button>
+      </form>
+      <div id="todo-duplicate-error" style="display:none;color:#ef4444;font-size:0.85rem;margin-top:0.25rem;" role="alert">Task already exists.</div>
+      <select id="todo-sort">
+        <option value="creation">Creation</option>
+        <option value="alphabetical">Alphabetical</option>
+        <option value="completion">Completion</option>
+      </select>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <!-- Quick Links Widget -->
+    <section id="quick-links" class="widget">
+      <h2 class="widget-title">Quick Links</h2>
+      <form id="links-form">
+        <input id="links-label-input" type="text" placeholder="Label" autocomplete="off" />
+        <input id="links-url-input" type="text" placeholder="https://example.com" autocomplete="off" />
+        <button type="submit">Add</button>
+      </form>
+      <div id="links-list"></div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
